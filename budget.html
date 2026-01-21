@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget & Wages</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <header class="bg-light py-4">
+        <div class="container">
+            <h1 class="text-center">Apna Budget & Wages</h1>
+            <nav>
+                <a href="index.html" class="btn btn-outline-secondary">Back to Main</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container my-5">
+        <section id="budget">
+            <h2>Transport Budget</h2>
+            <table class="table table-striped" id="budgetTable">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Cost (₹)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Fuel</td><td>500</td></tr>
+                    <tr><td>Maintenance</td><td>200</td></tr>
+                    <tr><td>Insurance</td><td>300</td></tr>
+                    <tr id="totalRow"><td><strong>Total Spent</strong></td><td id="totalAmount"><strong>0</strong></td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="balance" class="mt-5">
+            <h2>Saara Budget Aur Balance</h2>
+            <div>
+                <p><strong>Total Budget:</strong> ₹1000</p>
+                <p><strong>Total Spent:</strong> ₹<span id="spentAmount">0</span></p>
+                <p><strong>Balance:</strong> ₹<span id="balanceAmount">0</span></p>
+            </div>
+        </section>
+
+        <section id="wages" class="mt-5">
+            <h2>Worker Wages</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Worker</th>
+                        <th>Role</th>
+                        <th>Wage (₹/hour)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>John Doe</td><td>Driver</td><td>25</td></tr>
+                    <tr><td>Jane Smith</td><td>Mechanic</td><td>30</td></tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const table = document.getElementById('budgetTable');
+            const rows = table.querySelectorAll('tbody tr:not(#totalRow)');
+            let total = 0;
+            rows.forEach(row => {
+                const cost = parseFloat(row.cells[1].textContent);
+                if (!isNaN(cost)) total += cost;
+            });
+            document.getElementById('totalAmount').textContent = total;
+            document.getElementById('spentAmount').textContent = total;
+            
+            const totalBudget = 1000; // Hardcoded total budget - edit as needed
+            const balance = totalBudget - total;
+            document.getElementById('balanceAmount').textContent = balance;
+        });
+    </script>
+</body>
+</html>
